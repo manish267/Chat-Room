@@ -26,6 +26,8 @@ socket.on('roomUsers',({room,users})=>{
 socket.on("message", (message) => {
   console.log(message);
   outputMessage(message);
+  const audio=document.querySelector('audio')
+  audio.play();
 
   // Scroll down
   chatMessages.scrollTop=chatMessages.scrollHeight;
@@ -39,9 +41,11 @@ chatForm.addEventListener("submit", (e) => {
 
   // Get message text
   let msg = e.target.elements.msg.value;
+ 
 
   // Emit message to server
   socket.emit("chatMessage", msg);
+
   e.target.elements.msg.value=""
   e.target.elements.msg.focus();
 });
